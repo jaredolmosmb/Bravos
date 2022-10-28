@@ -11,7 +11,16 @@ from django.utils.translation import gettext_lazy as _
 from .managers import CustomUserManager
 
 
+class Player(models.Model):
+	name = models.CharField(max_length=1000)
+	position = models.CharField(max_length=1000)
+	games_played = models.PositiveIntegerField()
+	minutes_played = models.FloatField()
+	yellow_cards = models.PositiveIntegerField()
 
+	def __str__(self):
+		return self.name
+		
 class CustomUser(AbstractUser):
     username = None
     email = models.EmailField(_('email address'), unique=True)

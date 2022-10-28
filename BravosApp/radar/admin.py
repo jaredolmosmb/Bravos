@@ -1,11 +1,11 @@
 from django.contrib import admin
-from .models import CustomUser
+from .models import CustomUser, Player
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 
-
+class 
 
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
