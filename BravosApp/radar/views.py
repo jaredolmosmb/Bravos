@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib import messages 
 from .decorators import authenticated_user
+import pandas as pd
 
 # Create your views here.
 
@@ -15,6 +16,17 @@ from .decorators import authenticated_user
 def IndexView(request):
 	return render (request, 'radar/index.html')
 
+class RadarView(View):
+    def post(self, request):
+        p1 = Player.objects.get(id = int(request.POST.get("seleccion1")))
+        p2 = Player.objects.get(id = int(request.POST.get("seleccion2")))
+        players = Player.objects.all()
+        ronaldo = 'Ronaldo'
+        return render(request, 'radar/radar.html', {'players': players, 'p1': p1, 'p2': p2})
+
+    def get(self, request):
+        players = Player.objects.all()
+        return render(request, 'radar/radar.html', {'players': players})
 
 class InicioPlataforma(View):
     def get(self, request):

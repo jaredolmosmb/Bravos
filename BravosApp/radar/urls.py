@@ -6,6 +6,7 @@ app_name = 'radar'
 
 urlpatterns = [
 	path('', views.IndexView, name =  "index"),
+	path('radar', views.RadarView.as_view(), name =  "radar"),
 	path('inicioPlataforma', views.InicioPlataforma.as_view(), name='inicioPlataforma'),
 	path('loginJson/', views.LoginJsonView.as_view(), name='loginjson'),
 	path('agregarRegistro/', views.AgregarRegistro.as_view(), name='agregarRegistro'),
