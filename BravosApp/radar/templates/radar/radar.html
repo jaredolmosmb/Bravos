@@ -143,14 +143,12 @@ Radar
     {% csrf_token %}
 
     <select id="seleccion1" name='seleccion1' class="form-control">
-          <option value="" selected>Please select a player 1</option>
           {% for i in players %}
           <option value="{{ i.id }}">{{ i.name }}</option>
           {% endfor %}
     </select>
     <br>
     <select id="seleccion2" name='seleccion2' class="form-control">
-          <option value="" selected>Please select a player 2</option>
           {% for i in players %}
           <option value="{{ i.id }}">{{ i.name }}</option>
           {% endfor %}
@@ -162,8 +160,14 @@ Radar
 {{p1.name}}
 <br>
 {{p2.name}}
+<br>
+{% if chart %}
+    <img src="data:image/png;base64, {{chart|safe}}">
+{% else %}
 
+{% endif %}
 
+<!--
 <canvas id="myChart" width="200" height="200"></canvas>
 <script>
 const ctx = document.getElementById('myChart').getContext('2d');
@@ -206,5 +210,6 @@ const myChart = new Chart(ctx, {
     }
 });
 </script>
+-->
 
 {% endblock %}

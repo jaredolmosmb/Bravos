@@ -9,6 +9,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib import messages 
 from .decorators import authenticated_user
 import pandas as pd
+from .utils import get_plot, get_radar, get_radar2
 
 # Create your views here.
 
@@ -18,11 +19,33 @@ def IndexView(request):
 
 class RadarView(View):
     def post(self, request):
-        p1 = Player.objects.get(id = int(request.POST.get("seleccion1")))
-        p2 = Player.objects.get(id = int(request.POST.get("seleccion2")))
+        value_1 = request.POST.get("seleccion1")
+        value_2 = request.POST.get("seleccion2")
+        p1 = Player.objects.get(id = int(value_1))
+        p2 = Player.objects.get(id = int(value_2))
         players = Player.objects.all()
+        categories = []
+        for indx, field in enumerate(Player._meta.fields):
+            if indx>2:
+                categories.append(str(field.name))
+        categories.append('')
+
+        player1 = [p1.games_played, p1.minutes_played, p1.yellow_cards]
+        player2 = [p2.games_played, p2.minutes_played, p2.yellow_cards]
+
+        print('categories', categories)
+        print('player1', player1)
+        print('player2', player2)
+        x= [x.name for x in players]
+        y= [y.games_played for y in players]
+
+        name1 = p1.name
+        name2 = p2.name
+
+        chart = get_radar2(categories, player1, player2, name1, name2)
         ronaldo = 'Ronaldo'
-        return render(request, 'radar/radar.html', {'players': players, 'p1': p1, 'p2': p2})
+
+        return render(request, 'radar/radar.html', {'players': players, 'p1': p1, 'p2': p2, 'chart': chart})
 
     def get(self, request):
         players = Player.objects.all()
