@@ -18,9 +18,11 @@ Radar
         <li class="breadcrumb-item active" aria-current="page">Radar</li>
 </nav>
 
-<form method='POST' enctype="">
-    
+<form method='POST' enctype="multipart/form-data">
+
     {% csrf_token %}
+
+    {{ form.as_p }}
 
     <select id="seleccion1" name='seleccion1' class="form-control">
           {% for i in players %}

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User, AbstractBaseUser, AbstractUser, Per
 from datetime import datetime, timedelta
 from django.core.exceptions import ValidationError
 from django.conf import settings
+from django.utils import timezone
 import uuid, random
 from django.contrib.auth.models import Group
 
@@ -10,6 +11,13 @@ from django.utils.translation import gettext_lazy as _
 
 from .managers import CustomUserManager
 
+class Reader(models.Model):
+    file = models.FileField(blank=True, null=True)
+    date_uploaded = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        ordering = ['-date_uploaded']
+        verbose_name_plural = "Reader"
 
 class Player(models.Model):
 	name = models.CharField(max_length=1000)
