@@ -73,8 +73,8 @@ class RadarView(View):
         if form.is_valid():
 
             file = form.cleaned_data.get('file')
-            print('file: ', file)
-            print("type(file): ", type(file))
+            #print('file: ', file)
+            #print("type(file): ", type(file))
 
             file = form.cleaned_data.get('file')
             obj = form.save(commit=False)
@@ -93,20 +93,20 @@ class RadarView(View):
 
             # 1.2 Loading the dataset of all the players of Liga MX
             df_allplayers_ligamx = pd.read_excel('https://github.com/julioe-perezlara/FC_Juarez/blob/master/Datasets/promedioligamx_centrales_11_5_21.xlsx?raw=True') # Read an excel file from internet (Github) 
-            print('Liga MX %s dataset' %(v_position)) 
-            print(df_allplayers_ligamx) # Display the dataset of al players of Liga MX
+            #print('Liga MX %s dataset' %(v_position)) 
+            #print(df_allplayers_ligamx) # Display the dataset of al players of Liga MX
 
             # 1.3 Loading the dataset of the soccer player to be compared
             df_player = pd.read_excel(open(obj.file.path,'rb'))
             #df_player = pd.read_excel('https://github.com/julioe-perezlara/FC_Juarez/blob/master/Datasets/jonas_ramalho_11_5_21.xlsx?raw=True') # Read an excel file from internet (Github)
-            print('\n%s dataset' %(v_soccerplayer))
-            print(df_player) # Display the dataset of a single player
+            #print('\n%s dataset' %(v_soccerplayer))
+            #print(df_player) # Display the dataset of a single player
 
             # 1.4 Get the name of all the columns
             ls_allplayers_ligamx_columnsname = df_allplayers_ligamx.columns.to_list() # Get the names of all the columns in "All-soccer players dataset"
-            print('\nVariables de intéres:\n')
-            for x in ls_allplayers_ligamx_columnsname:   # For-loop iterates over all the column names
-              print(x) 
+            #print('\nVariables de intéres:\n')
+            #for x in ls_allplayers_ligamx_columnsname:   # For-loop iterates over all the column names
+              #print(x) 
 
             # %s     This operator lets Python add a String value into a string. In this case, %s stores the name and role of the soccer player
 
@@ -128,13 +128,13 @@ class RadarView(View):
 
             # 2.4 Add a column to the "All-soccer players mean dataset"
             df_allplayers_ligamx_mean.insert(0, "Jugador", ["Promedio Liga Mx"]) #add column
-            print('\nAverage of all %s in Liga MX:\n' %(v_position))
-            print(df_allplayers_ligamx_mean) # Display the dataset that contains the mean of each variable for all soccer players
+            #print('\nAverage of all %s in Liga MX:\n' %(v_position))
+            #print(df_allplayers_ligamx_mean) # Display the dataset that contains the mean of each variable for all soccer players
 
             # 2.5 Concatenate the dataframes
             df_radarchart = df_player.append(df_allplayers_ligamx_mean, ignore_index=True) # Merge ""All-soccer players mean dataframe" with "Single soccer player dataframe"
-            print('\n\nRadar chart dataframe (Comparative):\n')
-            print(df_radarchart)
+            #print('\n\nRadar chart dataframe (Comparative):\n')
+            #print(df_radarchart)
             df_radarchart.to_excel(r'C:\Users\artur\prueba\Bravos\tabla comparativa.xlsx',index=False)
 
             #--------------------------------------STEP 3---------------------------------
@@ -149,14 +149,14 @@ class RadarView(View):
               a = textwrap.fill(x, 20)
               rg_param.append(a)
 
-            print(rg_param)
+            #print(rg_param)
 
             # Get variables
             player1 = df_radarchart.iloc[0, 0]
             player2 = df_radarchart.iloc[1, 0]
-            print('\n\n')
-            print(player1)
-            print(player2)
+            #print('\n\n')
+            #print(player1)
+            #print(player2)
 
             # Step 3: Visualizing the data and looking for outliers (part 1)
 
@@ -212,8 +212,8 @@ class RadarView(View):
             values = [a_values, b_values]
 
             # Print the values
-            print(values)
-            print(ranges)
+            #print(values)
+            #print(ranges)
 
             # Get the Current Date
             today_date = str(datetime.today().strftime('%m-%d-%Y'))

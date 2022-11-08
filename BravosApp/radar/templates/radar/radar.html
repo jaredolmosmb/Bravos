@@ -24,36 +24,20 @@ Radar
 
     {{ form.as_p }}
 
-    <select id="seleccion1" name='seleccion1' class="form-control">
-          {% for i in players %}
-          <option value="{{ i.id }}">{{ i.name }}</option>
-          {% endfor %}
-    </select>
-    <br>
-    <select id="seleccion2" name='seleccion2' class="form-control">
-          {% for i in players %}
-          <option value="{{ i.id }}">{{ i.name }}</option>
-          {% endfor %}
-    </select>
-    <br>
     <button type="submit" class="btn btn-master">Enviar</button>
 
 </form>
-{{p1.name}}
-<br>
-{{p2.name}}
-<br>
 
 
 {% if graph %}
 <!-- Source of svg -->
+<div>
+  <button id="getPdf" class="btn btn-master">Generate PDF</button>
+</div>
 <div id="svg-container" style="overflow:scroll; height:600px;">
    {{graph|safe}}
 </div>
 
-<div>
-  <button id="getPdf" class="btn btn-master">Generate PDF</button>
-</div>
 
 {% else %}
 
