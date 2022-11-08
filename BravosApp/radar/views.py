@@ -73,12 +73,13 @@ class RadarView(View):
         if form.is_valid():
 
             file = form.cleaned_data.get('file')
+            file2 = form.cleaned_data.get('file2')
             #print('file: ', file)
             #print("type(file): ", type(file))
 
-            file = form.cleaned_data.get('file')
             obj = form.save(commit=False)
             obj.file = file
+            obj.file2 = file2
             obj.save()
 
             with open(obj.file.path, 'rb') as f:
@@ -92,7 +93,8 @@ class RadarView(View):
             v_soccerplayer = "Chema Rodriguez" # <-- Please edit this value according to the soccer player full name
 
             # 1.2 Loading the dataset of all the players of Liga MX
-            df_allplayers_ligamx = pd.read_excel('https://github.com/julioe-perezlara/FC_Juarez/blob/master/Datasets/promedioligamx_centrales_11_5_21.xlsx?raw=True') # Read an excel file from internet (Github) 
+            df_allplayers_ligamx = pd.read_excel(open(obj.file2.path,'rb'))
+            #df_allplayers_ligamx = pd.read_excel('https://github.com/julioe-perezlara/FC_Juarez/blob/master/Datasets/promedioligamx_centrales_11_5_21.xlsx?raw=True') # Read an excel file from internet (Github) 
             #print('Liga MX %s dataset' %(v_position)) 
             #print(df_allplayers_ligamx) # Display the dataset of al players of Liga MX
 

@@ -25,15 +25,19 @@ Radar
     {{ form.as_p }}
 
     <button type="submit" class="btn btn-master">Enviar</button>
-
+    {% if graph %}
+    </form>
+    <button id="getPdf" class="btn btn-master" style= "position: relative;">Generate PDF</button>
+    {% else %}
 </form>
+    {% endif %}
+
+
 
 
 {% if graph %}
 <!-- Source of svg -->
-<div>
-  <button id="getPdf" class="btn btn-master">Generate PDF</button>
-</div>
+
 <div id="svg-container" style="overflow:scroll; height:600px;">
    {{graph|safe}}
 </div>

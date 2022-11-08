@@ -7,13 +7,18 @@ from django.db.models import Q
 import datetime
 from .models import *
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.utils.translation import gettext_lazy as _
 
 from .models import CustomUser
 
 class ReaderForm(forms.ModelForm):
     class Meta:
         model = Reader
-        fields = ['file']
+        fields = ['file', 'file2']
+        labels = {
+            'file': _('Selecciona el archivo de jugador comparar'),
+            'file2': _('Selecciona el archivo de promedio comparar'),
+        }
         
 class CustomUserCreationForm(UserCreationForm):
 
