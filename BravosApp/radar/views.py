@@ -82,8 +82,13 @@ class RadarView(View):
             obj.file2 = file2
             obj.save()
 
-            with open(obj.file.path, 'rb') as f:
-                result = chardet.detect(f.read())
+            try:
+                with open(obj.file.path, 'rb') as f:
+                    result = chardet.detect(f.read())
+                with open(obj.file2.path, 'rb') as f:
+                    result = chardet.detect(f.read())
+            except:
+                return render(request, 'radar/radar.html', {'form': form, 'players': players})
 
             #Here is the google colab script
             # change display to print so it can work properly
