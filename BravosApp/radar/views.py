@@ -23,12 +23,31 @@ from soccerplots.utils import add_image
 import matplotlib.colors as mcolors # Allow us create colormap objects from a list of colors
 from io import StringIO
 import chardet
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
 # Create your views here.
 
 @authenticated_user
 def IndexView(request):
 	return render (request, 'radar/index.html')
+
+@authenticated_user
+def ListaUsuariosView(request):
+    todos_u=CustomUser.objects.all()
+    return render(request, 'radar/listaUsuarios.html', {'todos_u': todos_u})
+
+class ActualizarUsuarios(UpdateView):
+    model = CustomUser
+    form_class = CustomUserChangeForm
+    template_name = 'radar/modU.html'
+    success_url = reverse_lazy('radar:listaU')
+
+class EliminarUsuarios(DeleteView):
+    model = CustomUser
+    form_class = CustomUserChangeForm
+    template_name = 'radar/u_confirm_delete.html'
+    success_url = reverse_lazy('radar:listaU')
 
 class RadarView(View):
 
