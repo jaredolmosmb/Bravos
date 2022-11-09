@@ -290,6 +290,8 @@ class RadarView(View):
             imgdata.seek(0)
             data = imgdata.getvalue()
 
+            obj.delete()
+
             return render(request, 'radar/radar.html', {'form': form, 'players': players, 'graph': data})
 
     def get(self, request):
