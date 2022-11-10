@@ -25,6 +25,7 @@ from io import StringIO
 import chardet
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -39,14 +40,16 @@ def ListaUsuariosView(request):
 
 class ActualizarUsuarios(UpdateView):
     model = CustomUser
+    print('aqui')
     form_class = CustomUserChangeForm
     template_name = 'radar/modU.html'
     success_url = reverse_lazy('radar:listaU')
 
+
 class EliminarUsuarios(DeleteView):
     model = CustomUser
-    form_class = CustomUserChangeForm
     template_name = 'radar/u_confirm_delete.html'
+
     success_url = reverse_lazy('radar:listaU')
 
 class RadarView(View):
@@ -345,7 +348,7 @@ def CreateUsuarioView(request):
             usuario = registroForm.save()
             usuario.save()
             registroForm.save()
-            return(redirect('radar:index2'))
+            return(redirect('radar:index'))
         else:
         
             return render(request, 'radar/cargarUsuario.html', {'registroForm':registroForm})

@@ -33,7 +33,7 @@ class Player(models.Model):
 class CustomUser(AbstractUser):
     username = None
     email = models.EmailField(_('email address'), unique=True)
-
+    name = models.CharField(max_length=200, default="nm")
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
@@ -41,6 +41,9 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.email
+    @property
+    def usuario_id(self):
+        return unicode(self.id)
 
 """class Usuario(AbstractUser):
 	telefono = models.CharField(max_length=15,default="")
